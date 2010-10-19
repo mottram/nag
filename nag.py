@@ -1,14 +1,9 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import sys, os, fileinput
-config = os.getenv("XDG_CONFIG_HOME")
 
-if not os.path.exists(config + "/nag"):
-    os.makedirs(config + "/nag")
-    filename = config + "/nag/list.txt"
-else:
-    filename = config + "/nag/list.txt"
-
+home = os.getenv("HOME")
+filename = home + "/.nag"
 txt = open(filename, "a")
 size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
