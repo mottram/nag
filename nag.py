@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys, os, fileinput
 
 home = os.getenv("HOME")
 filename = home + "/.nag"
-txt = open(filename, "a")
+test = open(filename, "a")
+test.close()
 size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
 
@@ -20,9 +21,8 @@ def add():
     new_item = raw_input("> ")
     with open(filename, "a") as f:
         f.write(new_item + "\n")
-    f.close()
 
-def ls():
+def list():
     if size == 0:
         error()
     else:
@@ -36,7 +36,6 @@ def clear():
     if answer == "y":
         with open(filename, "w") as f:
             f.truncate()
-            f.close()
             print "List cleared!",
     else:
         exit()
@@ -47,7 +46,6 @@ def first_line():
     else:
         with open(filename) as f:
             print "Next item: " + f.readline(),
-            f.close()
 
 def delete():
     line_to_delete = int(sys.argv[2])
@@ -70,11 +68,11 @@ def searcher():
             f.close()
             break
     else:
-        print search_term, "not found",
+        print search_term, "not found.",
 
 try:
     if sys.argv[1] == "ls":
-        ls()
+        list()
     elif sys.argv[1] == "help":
         helper()
     elif sys.argv[1] == "c":
