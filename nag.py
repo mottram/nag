@@ -25,6 +25,7 @@ def add():
     new_item = raw_input("> ")
     with open(filename, "a") as f:
         f.write(new_item + "\n")
+    f.close()
 
 def ls():
     if size == 0:
@@ -71,6 +72,7 @@ def searcher():
         line_num += 1
         if search_term in line:
             print line_num, line,
+            f.close()
             break
     else:
         print search_term, "not found",
