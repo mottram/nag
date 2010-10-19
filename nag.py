@@ -13,10 +13,6 @@ txt = open(filename, "a")
 size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
 
-for line in txt:
-    if line.strip():
-        sys.stdout.write(line)
-
 def helper():
     print """
  ls   \tshow the contents of your list
