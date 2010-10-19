@@ -4,17 +4,17 @@
 
 ### Usage
 
-Run `nag` on its own to see the oldest item on your todo list. Use the following commands to manage the list.
+Run `nag` on its own to see the oldest item on your todo list. Use nag with these arguments to manage your list:
 
- ls    show the contents of your list
- a     add an item to your list
- c     clear your list
- d [n] remove item [n] from your list
+* a - add an item to your list
+* c - clear your list
+* d [n] - remove item [n] from your list
+* ls - show the contents of your list
 
 ### Bugs
 
-Um, it probably only works on an up-to-date installation of Arch Linux with `$XDG_CONFIG_HOME` set to `~/.config`. I'll fix that shortly!
+Um, it probably only works on an up-to-date installation of Arch Linux with `$XDG_CONFIG_HOME` set to `~/.config` at the moment. I'll fix that shortly!
 
-#### Why?
+### Why?
 
-I know the world doesn't need yet another CLI todo list thingy, but I just finished _[Learning Python the Hard Way](http://learnpythonthehardway.org/index)_ and wanted to make something.
+I know the world doesn't need yet another CLI todo list thingy, but I just finished _[Learning Python the Hard Way](http://learnpythonthehardway.org/index)_ and wanted to try to make something.
