@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys, os, fileinput
 
@@ -9,14 +9,9 @@ size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
 
 def helper():
-    print """
- ls   \tshow the contents of your list
- a    \tadd an item to your list
- n    \tshow the next item on your list
- c    \tclear your list
- d [n]\tremove item [n] from your list
-    """
-    return("")
+    table = {"a": "Add an item to your list", "c": "Clear your list", "d [n]": "Remove item [n] from your list", "ls": "Show the contents of your list", "s": "Search your list"}
+    for command, explanation in table.items():
+        print "{0:10}  {1:10}".format(command, explanation)
 
 def error():
     print "There's nothing to do!\nUse 'nag a' to add a new item to your list."
