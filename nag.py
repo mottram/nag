@@ -51,6 +51,7 @@ def first_line():
     else:
         with open(filename) as f:
             print "Next item: " + f.readline(),
+            f.close()
 
 def delete():
     line_to_delete = int(sys.argv[2])
@@ -61,6 +62,18 @@ def delete():
         del lines[line_to_delete -1]
         open(filename, 'w').writelines(lines)
         print "Item", line_to_delete , "deleted!"
+
+def searcher():
+    search_term = raw_input("> ")
+    line_num = 0
+    f = open(filename)
+    for line in f.readlines():
+        line_num += 1
+        if search_term in line:
+            print line_num, line,
+            break
+    else:
+        print search_term, "not found",
 
 try:
     if sys.argv[1] == "ls":
@@ -73,6 +86,8 @@ try:
         add()
     elif sys.argv[1] == "d":
         delete()
+    elif sys.argv[1] == "s":
+        searcher()
     else:
         print "Oops! It looks like you mistyped a command:"
         helper()
