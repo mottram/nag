@@ -2,6 +2,10 @@
 1. Save the script as `nag` somewhere in your path (eg `~/bin`)
 2. `chmod a+x ~/bin/nag`
 
+Or clone this repo and symlink the file to somewhere in your path.
+
+NB: You probably shouldn't use this script: I don't know what I'm doing (see below).
+
 ### Usage
 
 Run `nag` on its own to see the oldest item on your todo list. Use nag with these arguments to manage your list:
@@ -10,10 +14,6 @@ Run `nag` on its own to see the oldest item on your todo list. Use nag with thes
 * c - clear your list
 * d [n] - remove item [n] from your list
 * ls - show the contents of your list
-
-### Bugs
-
-Um, it probably only works on an up-to-date installation of Arch Linux with `$XDG_CONFIG_HOME` set to `~/.config` at the moment. I'll fix that shortly!
 
 ### Why?
 
