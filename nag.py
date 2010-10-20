@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 
-import sys, os, fileinput
+# TODO: sort usage table alphabetically - can't sort a dict?
+#       make search find after first instance
+#       take args for -a, -d and -s on command line instead of with raw_input
+#       do the check if ~/.nag exists bit properly
+#            look for XDG_CONFIG_HOME and put nag dir in there, otherwise default to ~/.nag?
+
+import sys, os, fileinput, getopt
 
 home = os.getenv("HOME")
 filename = home + "/.nag"
@@ -9,8 +15,9 @@ test.close()
 size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
 
-def helper():
-    table = {"a": "Add an item to your list", "c": "Clear your list", "d [n]": "Remove item [n] from your list", "ls": "Show the contents of your list", "s": "Search your list"}
+def usage():
+    print "usage: nag [-acdls] "
+    table = {"-a": "add an item to your list", "-c": "clear your list", "-d [n]": "remove item [n] from your list", "-l": "show the contents of your list", "-s": "search your list"}
     for command, explanation in table.items():
         print "{0:10}  {1:10}".format(command, explanation)
 
@@ -70,21 +77,32 @@ def searcher():
     else:
         print search_term, "not found.",
 
-try:
-    if sys.argv[1] == "ls":
-        list()
-    elif sys.argv[1] == "help":
-        helper()
-    elif sys.argv[1] == "c":
-        clear()
-    elif sys.argv[1] == "a":
-        add()
-    elif sys.argv[1] == "d":
-        delete()
-    elif sys.argv[1] == "s":
-        searcher()
+def main(argv):
+    if len(sys.argv) == 1:
+        first_line()
     else:
-        print "Oops! It looks like you mistyped a command:"
-        helper()
-except IndexError:
-    first_line()
+        try:
+            opts, args = getopt.getopt(sys.argv[1:], "acd:hls", ["add", "clear", "delete=", "list", "search"])
+        except getopt.GetoptError, err:
+            print str(err) 
+            usage()
+            sys.exit(2)
+
+        for opt, arg in opts:
+            if opt in ("-h", "--help"):
+                usage()    
+            elif opt in ("-l", "--list"):
+                list()
+            elif opt in ("-a", "--add"):
+                add()
+            elif opt in ("-c", "--clear"):
+                clear()
+            elif opt in ("-s", "--search"):
+                searcher()
+            elif opt in ("-d", "--delete"):
+                delete()
+            else:
+                usage()
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
