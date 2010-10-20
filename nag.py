@@ -1,11 +1,5 @@
 #!/usr/bin/env python
 
-# TODO: sort usage table alphabetically - can't sort a dict?
-#       make search find after first instance
-#       take args for -a, -d and -s on command line instead of with raw_input
-#       do the check if ~/.nag exists bit properly
-#            look for XDG_CONFIG_HOME and put nag dir in there, otherwise default to ~/.nag?
-
 import sys, os, fileinput, getopt
 
 home = os.getenv("HOME")
@@ -82,7 +76,7 @@ def main(argv):
         first_line()
     else:
         try:
-            opts, args = getopt.getopt(sys.argv[1:], "acd:hls", ["add", "clear", "delete=", "list", "search"])
+            opts, args = getopt.getopt(sys.argv[1:], "acd:hls", ["add", "clear", "delete=", "help", "list", "search"])
         except getopt.GetoptError, err:
             print str(err) 
             usage()
