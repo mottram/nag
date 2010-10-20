@@ -1,11 +1,4 @@
 #!/usr/bin/env python2
-# This is identical to nag.py, but points at python2 for use on Arch
-
-# TODO: sort usage table alphabetically - can't sort a dict?
-#       make search find after first instance
-#       take args for -a, -d and -s on command line instead of with raw_input
-#       do the check if ~/.nag exists bit properly
-#            look for XDG_CONFIG_HOME and put nag dir in there, otherwise default to ~/.nag?
 
 import sys, os, fileinput, getopt
 
@@ -23,12 +16,15 @@ def usage():
         print "{0:10}  {1:10}".format(command, explanation)
 
 def error():
-    print "There's nothing to do!\nUse 'nag a' to add a new item to your list."
+    print "There's nothing to do!\nUse 'nag -a' to add a new item to your list."
 
 def add():
-    new_item = raw_input("> ")
-    with open(filename, "a") as f:
-        f.write(new_item + "\n")
+    if len(sys.argv) == 2:
+        print "Nothing to add! See nag -h for help."
+    else:
+        new_item = " ".join(sys.argv[2:])
+        with open(filename, "a") as f:
+            f.write(new_item + "\n")
 
 def list():
     if size == 0:
@@ -66,24 +62,27 @@ def delete():
         print "Item", line_to_delete , "deleted!"
 
 def searcher():
-    search_term = raw_input("> ")
-    line_num = 0
-    f = open(filename)
-    for line in f.readlines():
-        line_num += 1
-        if search_term in line:
-            print line_num, line,
-            f.close()
-            break
+    if len(sys.argv) == 2:
+        print "Nothing to search for!"
     else:
-        print search_term, "not found.",
+        search_term = "".join(sys.argv[2])
+        line_num = 0
+        f = open(filename)
+        for line in f.readlines():
+            line_num += 1
+            if search_term in line:
+                print line_num, line,
+                f.close()
+                break
+            else:
+                print search_term, "not found.",
 
 def main(argv):
     if len(sys.argv) == 1:
         first_line()
     else:
         try:
-            opts, args = getopt.getopt(sys.argv[1:], "acd:hls", ["add", "clear", "delete=", "list", "search"])
+            opts, args = getopt.getopt(sys.argv[1:], "acd:hls", ["add", "clear", "delete=", "help", "list", "search"])
         except getopt.GetoptError, err:
             print str(err) 
             usage()
@@ -103,7 +102,7 @@ def main(argv):
             elif opt in ("-d", "--delete"):
                 delete()
             else:
-                usage()
+                sys.exit(2)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
