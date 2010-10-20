@@ -16,7 +16,7 @@ def usage():
         print "{0:10}  {1:10}".format(command, explanation)
 
 def error():
-    print "There's nothing to do!\nUse 'nag a' to add a new item to your list."
+    print "There's nothing to do!\nUse 'nag -a' to add a new item to your list."
 
 def add():
     if len(sys.argv) == 2:
@@ -102,7 +102,7 @@ def main(argv):
             elif opt in ("-d", "--delete"):
                 delete()
             else:
-                usage()
+                sys.exit(2)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
