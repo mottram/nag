@@ -10,7 +10,7 @@ size = os.path.getsize(filename)
 number_of_lines = len(open(filename).readlines())
 
 def usage():
-    print "usage: nag [-acdls] "
+    print "usage: nag [-acdl] "
     table = {"-a": "add an item to your list", "-c": "clear your list", "-d [n]": "remove item [n] from your list", "-l": "show the contents of your list"}
     for command, explanation in table.items():
         print "{0:10}  {1:10}".format(command, explanation)
