@@ -17,7 +17,6 @@ Run `nag` on its own to see the oldest item on your todo list. Use nag with thes
     -c, --clear             clear your list
     -d [n], --delete [n]    remove item [n] from your list
     -l, --list              show the contents of your list
-    -s, --search            search your list
 
 ### Why?
 
