@@ -11,12 +11,12 @@ number_of_lines = len(open(filename).readlines())
 
 def usage():
     print "usage: nag [-acdls] "
-    table = {"-a": "add an item to your list", "-c": "clear your list", "-d [n]": "remove item [n] from your list", "-l": "show the contents of your list", "-s": "search your list"}
+    table = {"-a": "add an item to your list", "-c": "clear your list", "-d [n]": "remove item [n] from your list", "-l": "show the contents of your list"}
     for command, explanation in table.items():
         print "{0:10}  {1:10}".format(command, explanation)
 
 def error():
-    print "There's nothing to do!\nUse 'nag -a' to add a new item to your list."
+    print "Your nag list is empty!\nUse 'nag -a' to add a new item."
 
 def add():
     if len(sys.argv) == 2:
@@ -61,22 +61,6 @@ def delete():
         open(filename, 'w').writelines(lines)
         print "Item", line_to_delete , "deleted!"
 
-def searcher():
-    if len(sys.argv) == 2:
-        print "Nothing to search for!"
-    else:
-        search_term = "".join(sys.argv[2])
-        line_num = 0
-        f = open(filename)
-        for line in f.readlines():
-            line_num += 1
-            if search_term in line:
-                print line_num, line,
-                f.close()
-                break
-            else:
-                print search_term, "not found.",
-
 def main(argv):
     if len(sys.argv) == 1:
         first_line()
@@ -97,8 +81,6 @@ def main(argv):
                 add()
             elif opt in ("-c", "--clear"):
                 clear()
-            elif opt in ("-s", "--search"):
-                searcher()
             elif opt in ("-d", "--delete"):
                 delete()
             else:
